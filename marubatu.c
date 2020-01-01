@@ -7,15 +7,13 @@
 *********************************************************************/
 #include <stdio.h>
 
-#define BORD_SIZE 9							/* 配列の最大要素数を定義 */
-#define MARU 10							/* 配列の最大要素数を定義 */
-#define BATU 11							/* 配列の最大要素数を定義 */
+#define BORD_SIZE 9 /* 配列の最大要素数を定義 */
+#define MARU 10		/* 配列の最大要素数を定義 */
+#define BATU 11		/* 配列の最大要素数を定義 */
 #define TRUE 1
 #define FALSE 0
 
-
 /* 関数のプロトタイプ宣言 */
-
 
 /********************************************************************
 関数名	：changePlayer
@@ -23,14 +21,14 @@
 引数	：なし
 戻値	：なし
 *********************************************************************/
-int changePlayer( int playerValue )
+int changePlayer(int playerValue)
 {
-	if(MARU == playerValue){
-		return BATU ;
+	if (MARU == playerValue)
+	{
+		return BATU;
 	}
-	return MARU ;
+	return MARU;
 }
-
 
 /********************************************************************
 関数名	：checkWin
@@ -38,26 +36,24 @@ int changePlayer( int playerValue )
 引数	：なし
 戻値	：勝利 ; TRUE(1)　その他:FAULSE(0)
 *********************************************************************/
-int checkWin( int bordData[ BORD_SIZE ] )
+int checkWin(int bordData[BORD_SIZE])
 {
 	// 横チェック
-	if( bordData[ 0 ] == bordData[ 1 ] && bordData[ 0 ] == bordData[ 2 ] 
-		|| bordData[ 3 ] == bordData[ 4 ] && bordData[ 3 ] == bordData[ 5 ] 
-		|| bordData[ 6 ] == bordData[ 7 ] && bordData[ 6 ] == bordData[ 8 ] ) {
-			return TRUE ;
+	if (bordData[0] == bordData[1] && bordData[0] == bordData[2] || bordData[3] == bordData[4] && bordData[3] == bordData[5] || bordData[6] == bordData[7] && bordData[6] == bordData[8])
+	{
+		return TRUE;
 	}
 	// 縦チェック
-	if( bordData[ 0 ] == bordData[ 3] && bordData[ 0 ] == bordData[ 6 ] 
-		|| bordData[ 1 ] == bordData[ 4 ] && bordData[ 1 ] == bordData[ 7 ] 
-		|| bordData[ 2 ] == bordData[ 5 ] && bordData[ 2 ] == bordData[ 8 ] ) {
-			return TRUE ;
+	if (bordData[0] == bordData[3] && bordData[0] == bordData[6] || bordData[1] == bordData[4] && bordData[1] == bordData[7] || bordData[2] == bordData[5] && bordData[2] == bordData[8])
+	{
+		return TRUE;
 	}
 	// ななめチェック
-	if( bordData[ 0 ] == bordData[ 4] && bordData[ 0 ] == bordData[ 8 ] 
-		|| bordData[ 2 ] == bordData[ 4 ] && bordData[ 2 ] == bordData[ 6 ] ) {
-			return TRUE ;
+	if (bordData[0] == bordData[4] && bordData[0] == bordData[8] || bordData[2] == bordData[4] && bordData[2] == bordData[6])
+	{
+		return TRUE;
 	}
-	return FALSE ;
+	return FALSE;
 }
 
 /********************************************************************
@@ -66,11 +62,14 @@ int checkWin( int bordData[ BORD_SIZE ] )
 引数	：なし
 戻値	：なし
 *********************************************************************/
-void printWinner( int playerValue)
+void printWinner(int playerValue)
 {
-	if(MARU == playerValue){
+	if (MARU == playerValue)
+	{
 		printf("おめでとうございます。〇の勝ちです。\r\n");
-	}else{
+	}
+	else
+	{
 		printf("おめでとうございます。×の勝ちです。\r\n");
 	}
 }
@@ -81,7 +80,7 @@ void printWinner( int playerValue)
 引数	：なし
 戻値	：なし
 *********************************************************************/
-void printLineEnd( )
+void printLineEnd()
 {
 	printf("\r\n");
 }
@@ -92,12 +91,11 @@ void printLineEnd( )
 引数	：なし
 戻値	：なし
 *********************************************************************/
-void printHorizenLine( )
+void printHorizenLine()
 {
 	printf("----------------");
-	printLineEnd( );
+	printLineEnd();
 }
-
 
 /********************************************************************
 関数名	：printVertical
@@ -105,7 +103,7 @@ void printHorizenLine( )
 引数	：なし
 戻値	：なし
 *********************************************************************/
-void printVertical( )
+void printVertical()
 {
 	printf("|");
 }
@@ -116,45 +114,46 @@ void printVertical( )
 引数	：int 出力する数字 10:〇 11:×
 戻値	：なし
 *********************************************************************/
-void printBlock( int number)
+void printBlock(int number)
 {
-	switch(number){
-		case 1 :
-			printf(" １ ");
-			break;
-		case 2 :
-			printf(" ２ ");
-			break;
-		case 3 :
-			printf(" ３ ");
-			break;
-		case 4 :
-			printf(" ４ ");
-			break;
-		case 5 :
-			printf(" ５ ");
-			break;
-		case 6 :
-			printf(" ６ ");
-			break;
-		case 7 :
-			printf(" ７ ");
-			break;
-		case 8 :
-			printf(" ８ ");
-			break;
-		case 9 :
-			printf(" ９ ");
-			break;
-		case 10 :
-			printf(" 〇 ");
-			break;
-		case 11 :
-			printf(" ×  ");
-			break;
-		default:
-			printf("    ");
-			break;
+	switch (number)
+	{
+	case 1:
+		printf(" １ ");
+		break;
+	case 2:
+		printf(" ２ ");
+		break;
+	case 3:
+		printf(" ３ ");
+		break;
+	case 4:
+		printf(" ４ ");
+		break;
+	case 5:
+		printf(" ５ ");
+		break;
+	case 6:
+		printf(" ６ ");
+		break;
+	case 7:
+		printf(" ７ ");
+		break;
+	case 8:
+		printf(" ８ ");
+		break;
+	case 9:
+		printf(" ９ ");
+		break;
+	case 10:
+		printf(" 〇 ");
+		break;
+	case 11:
+		printf(" ×  ");
+		break;
+	default:
+		printf("    ");
+		break;
 	}
 }
 
@@ -186,42 +185,42 @@ void printBlock( int number)
  *  ----------------
  *  
  **************************/
-void printBord( int bordData[ BORD_SIZE ] )
+void printBord(int bordData[BORD_SIZE])
 {
-	printHorizenLine( );
+	printHorizenLine();
 
-	printVertical( );
-	printBlock( bordData[0]);
-	printVertical( );
-	printBlock( bordData[1]);
-	printVertical( );
-	printBlock( bordData[2]);
-	printVertical( );
-	printLineEnd( );
-	
-	printHorizenLine( );
+	printVertical();
+	printBlock(bordData[0]);
+	printVertical();
+	printBlock(bordData[1]);
+	printVertical();
+	printBlock(bordData[2]);
+	printVertical();
+	printLineEnd();
 
-	printVertical( );
-	printBlock( bordData[3]);
-	printVertical( );
-	printBlock( bordData[4]);
-	printVertical( );
-	printBlock( bordData[5]);
-	printVertical( );
-	printLineEnd( );
+	printHorizenLine();
 
-	printHorizenLine( );
-	
-	printVertical( );
-	printBlock( bordData[6]);
-	printVertical( );
-	printBlock( bordData[7]);
-	printVertical( );
-	printBlock( bordData[8]);
-	printVertical( );
-	printLineEnd( );
+	printVertical();
+	printBlock(bordData[3]);
+	printVertical();
+	printBlock(bordData[4]);
+	printVertical();
+	printBlock(bordData[5]);
+	printVertical();
+	printLineEnd();
 
-	printHorizenLine( );
+	printHorizenLine();
+
+	printVertical();
+	printBlock(bordData[6]);
+	printVertical();
+	printBlock(bordData[7]);
+	printVertical();
+	printBlock(bordData[8]);
+	printVertical();
+	printLineEnd();
+
+	printHorizenLine();
 }
 
 /********************************************************************
@@ -230,41 +229,47 @@ void printBord( int bordData[ BORD_SIZE ] )
 引数	：なし
 戻値	：なし
 *********************************************************************/
-int main(void) {
+int main(void)
+{
 
-	int ibordData[ BORD_SIZE ] = {1,2,3,4,5,6,7,8,9} ;
-	int iplayerValue = MARU ;
+	int ibordData[BORD_SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	int iplayerValue = MARU;
 	int iinputValue = 0;
-	int gameCnt = 0 ;
-	int winFlag = FALSE ;
+	int gameCnt = 0;
+	int winFlag = FALSE;
 
-	
-	for(gameCnt=0;BORD_SIZE > gameCnt;){
+	for (gameCnt = 0; BORD_SIZE > gameCnt;)
+	{
 		printBord(ibordData);
-	    printf("1～9の数字を1つ入力してください ");
-	    scanf("%d", &iinputValue);
-		if(iinputValue > BORD_SIZE){
-		    printf("選択範囲外の数字が入力されています。再度、1～9の範囲で数字を入れ直して下さい。\r\n ");
-			continue ;
+		printf("1～9の数字を1つ入力してください ");
+		scanf("%d", &iinputValue);
+		if (iinputValue > BORD_SIZE)
+		{
+			printf("選択範囲外の数字が入力されています。再度、1～9の範囲で数字を入れ直して下さい。\r\n ");
+			continue;
 		}
-		if(ibordData[iinputValue -1] > BORD_SIZE){
-		    printf("すでに選択済みです。他の数字を選んでください。\r\n ");
-			continue ;
+		if (ibordData[iinputValue - 1] > BORD_SIZE)
+		{
+			printf("すでに選択済みです。他の数字を選んでください。\r\n ");
+			continue;
 		}
 		gameCnt++;
-		ibordData[iinputValue -1] = iplayerValue;
-		if(checkWin(ibordData)){
-			winFlag = TRUE ;
+		ibordData[iinputValue - 1] = iplayerValue;
+		if (checkWin(ibordData))
+		{
+			winFlag = TRUE;
 			break;
 		}
 		iplayerValue = changePlayer(iplayerValue);
 	}
 
-
 	printBord(ibordData);
-	if(winFlag){
+	if (winFlag)
+	{
 		printWinner(iplayerValue);
-	}else{
+	}
+	else
+	{
 		printf("お疲れ様です。引き分けです。\r\n");
 	}
 
