@@ -14,6 +14,144 @@
 #define FALSE 0
 
 /* 関数のプロトタイプ宣言 */
+/********************************************************************
+関数名	：changePlayer
+機能	：プレイヤーを切り替える
+引数	：なし
+戻値	：なし
+*********************************************************************/
+int changePlayer(int playerValue);
+
+/********************************************************************
+関数名	：checkWin
+機能	：勝敗判定を行う
+引数	：なし
+戻値	：勝利 ; TRUE(1)　その他:FAULSE(0)
+*********************************************************************/
+int checkWin(int bordData[BORD_SIZE]);
+
+/********************************************************************
+関数名	：printWinner
+機能	：勝利したプレイヤーを表示
+引数	：なし
+戻値	：なし
+*********************************************************************/
+void printWinner(int playerValue);
+
+/********************************************************************
+関数名	：printBord
+機能	：横線を標準出力する
+引数	：なし
+戻値	：なし
+*********************************************************************/
+void printLineEnd();
+
+/********************************************************************
+関数名	：printHorizen
+機能	：横線を標準出力する
+引数	：なし
+戻値	：なし
+*********************************************************************/
+void printHorizenLine();
+
+/********************************************************************
+関数名	：printVertical
+機能	：縦線を標準出力する
+引数	：なし
+戻値	：なし
+*********************************************************************/
+void printVertical();
+
+/********************************************************************
+関数名	：printBlock
+機能	：横線を標準出力する
+引数	：int 出力する数字 10:〇 11:×
+戻値	：なし
+*********************************************************************/
+void printBlock(int number);
+
+/********************************************************************
+関数名	：printBord
+機能	：横線を標準出力する
+引数	：なし
+戻値	：なし
+*********************************************************************/
+/**************************
+ * output image
+ **************************
+ *  ( init )
+ *  ----------------
+ *  | １ | ２ | ３ |
+ *  ----------------
+ *  | ４ | ５ | ６ |
+ *  ----------------
+ *  | ７ | ８ | ９ |
+ *  ----------------
+ *  
+ *  ( input 〇、×)
+ *  ----------------
+ *  | 〇 | × | 〇 |
+ *  ----------------
+ *  | 〇 | × | 〇 |
+ *  ----------------
+ *  | 〇 | × | 〇 |
+ *  ----------------
+ *  
+ **************************/
+void printBord(int bordData[BORD_SIZE]);
+
+/********************************************************************
+関数名	：main
+機能	：〇×ゲーム
+引数	：なし
+戻値	：なし
+*********************************************************************/
+int main(void)
+{
+
+	int ibordData[BORD_SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	int iplayerValue = MARU;
+	int iinputValue = 0;
+	int gameCnt = 0;
+	int winFlag = FALSE;
+
+	for (gameCnt = 0; BORD_SIZE > gameCnt;)
+	{
+		printBord(ibordData);
+		printf("1～9の数字を1つ入力してください ");
+		scanf("%d", &iinputValue);
+		if (iinputValue > BORD_SIZE)
+		{
+			printf("選択範囲外の数字が入力されています。再度、1～9の範囲で数字を入れ直して下さい。\r\n ");
+			continue;
+		}
+		if (ibordData[iinputValue - 1] > BORD_SIZE)
+		{
+			printf("すでに選択済みです。他の数字を選んでください。\r\n ");
+			continue;
+		}
+		gameCnt++;
+		ibordData[iinputValue - 1] = iplayerValue;
+		if (checkWin(ibordData))
+		{
+			winFlag = TRUE;
+			break;
+		}
+		iplayerValue = changePlayer(iplayerValue);
+	}
+
+	printBord(ibordData);
+	if (winFlag)
+	{
+		printWinner(iplayerValue);
+	}
+	else
+	{
+		printf("お疲れ様です。引き分けです。\r\n");
+	}
+
+	return (0);
+}
 
 /********************************************************************
 関数名	：changePlayer
@@ -66,11 +204,13 @@ void printWinner(int playerValue)
 {
 	if (MARU == playerValue)
 	{
-		printf("おめでとうございます。〇の勝ちです。\r\n");
+		printf("おめでとうございます。〇の勝ちです。");
+		printLineEnd();
 	}
 	else
 	{
-		printf("おめでとうございます。×の勝ちです。\r\n");
+		printf("おめでとうございます。×の勝ちです。");
+		printLineEnd();
 	}
 }
 
@@ -221,57 +361,4 @@ void printBord(int bordData[BORD_SIZE])
 	printLineEnd();
 
 	printHorizenLine();
-}
-
-/********************************************************************
-関数名	：main
-機能	：〇×ゲーム
-引数	：なし
-戻値	：なし
-*********************************************************************/
-int main(void)
-{
-
-	int ibordData[BORD_SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-	int iplayerValue = MARU;
-	int iinputValue = 0;
-	int gameCnt = 0;
-	int winFlag = FALSE;
-
-	for (gameCnt = 0; BORD_SIZE > gameCnt;)
-	{
-		printBord(ibordData);
-		printf("1～9の数字を1つ入力してください ");
-		scanf("%d", &iinputValue);
-		if (iinputValue > BORD_SIZE)
-		{
-			printf("選択範囲外の数字が入力されています。再度、1～9の範囲で数字を入れ直して下さい。\r\n ");
-			continue;
-		}
-		if (ibordData[iinputValue - 1] > BORD_SIZE)
-		{
-			printf("すでに選択済みです。他の数字を選んでください。\r\n ");
-			continue;
-		}
-		gameCnt++;
-		ibordData[iinputValue - 1] = iplayerValue;
-		if (checkWin(ibordData))
-		{
-			winFlag = TRUE;
-			break;
-		}
-		iplayerValue = changePlayer(iplayerValue);
-	}
-
-	printBord(ibordData);
-	if (winFlag)
-	{
-		printWinner(iplayerValue);
-	}
-	else
-	{
-		printf("お疲れ様です。引き分けです。\r\n");
-	}
-
-	return (0);
 }
