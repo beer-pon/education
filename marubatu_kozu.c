@@ -23,10 +23,18 @@
 int changePlayer(int playerValue);
 
 /********************************************************************
+関数名	：inputValidation
+機能	：入力値のバリデーションチェック
+引数	：なし
+戻値	：バリデーションエラー:TRUE(1) 　その他:FAULSE(0)
+*********************************************************************/
+int inputValidation(int bordData[BORD_SIZE]);
+
+/********************************************************************
 関数名	：checkWin
 機能	：勝敗判定を行う
 引数	：なし
-戻値	：勝利 ; TRUE(1)　その他:FAULSE(0)
+戻値	：勝利: TRUE(1)　その他:FAULSE(0)
 *********************************************************************/
 int checkWin(int bordData[BORD_SIZE]);
 
@@ -120,23 +128,20 @@ int main(void)
 		printBord(ibordData);
 		printf("1～9の数字を1つ入力してください ");
 		scanf("%d", &iinputValue);
-		if (iinputValue > BORD_SIZE)
-		{
-			printf("選択範囲外の数字が入力されています。再度、1～9の範囲で数字を入れ直して下さい。\r\n ");
+
+		if (inputValidation(ibordData,iinputValue)){
 			continue;
 		}
-		if (ibordData[iinputValue - 1] > BORD_SIZE)
-		{
-			printf("すでに選択済みです。他の数字を選んでください。\r\n ");
-			continue;
-		}
+
 		gameCnt++;
 		ibordData[iinputValue - 1] = iplayerValue;
+
 		if (checkWin(ibordData))
 		{
 			winFlag = TRUE;
 			break;
 		}
+
 		iplayerValue = changePlayer(iplayerValue);
 	}
 
@@ -166,6 +171,27 @@ int changePlayer(int playerValue)
 		return BATU;
 	}
 	return MARU;
+}
+
+/********************************************************************
+関数名	：inputValidation
+機能	：入力値のバリデーションチェック
+引数	：なし
+戻値	：バリデーションエラー: FAULSE(0)　その他:TRUE(1)
+*********************************************************************/
+int inputValidation(int bordData[BORD_SIZE], iinputValue)
+{
+	if (iinputValue > BORD_SIZE)
+	{
+		printf("選択範囲外の数字が入力されています。再度、1～9の範囲で数字を入れ直して下さい。\r\n ");
+		return TRUE;
+	}
+	if (ibordData[iinputValue - 1] > BORD_SIZE)
+	{
+		printf("すでに選択済みです。他の数字を選んでください。\r\n ");
+		return TRUE;
+	}
+	return FALSE;
 }
 
 /********************************************************************
