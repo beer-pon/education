@@ -1,0 +1,9 @@
+version: '3'
+services:
+  centos8:
+    container_name: "centos8"
+    working_dir: "/home/code"
+    build: ./
+    volumes:
+      - ./code:/home/code
+    tty: true 
