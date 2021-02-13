@@ -28,7 +28,7 @@ int changePlayer(int playerValue);
 引数	：なし
 戻値	：バリデーションエラー:TRUE(1) 　その他:FAULSE(0)
 *********************************************************************/
-int inputValidation(int bordData[BORD_SIZE]);
+int inputValidation(int bordData[BORD_SIZE], int iinputValue);
 
 /********************************************************************
 関数名	：checkWin
@@ -179,7 +179,7 @@ int changePlayer(int playerValue)
 引数	：なし
 戻値	：バリデーションエラー: FAULSE(0)　その他:TRUE(1)
 *********************************************************************/
-int inputValidation(int bordData[BORD_SIZE], iinputValue)
+int inputValidation(int ibordData[BORD_SIZE], int iinputValue)
 {
 	if (iinputValue > BORD_SIZE)
 	{
